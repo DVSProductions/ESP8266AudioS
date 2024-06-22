@@ -36,10 +36,10 @@ AudioFileSourceHTTPStream::AudioFileSourceHTTPStream(const char *url)
   client.setInsecure();
   saveURL[0] = 0;
   reconnectTries = 0;
-  open(url);
+  openC(url);
 }
 
-int AudioFileSourceHTTPStream::open(const char *url)
+int AudioFileSourceHTTPStream::openC(const char *url)
 {
   pos = 0;
   http.begin(client, url);
@@ -93,7 +93,7 @@ retry:
       sprintf_P(buff, PSTR("Attempting to reconnect, try %d"), i);
       cb.st(STATUS_RECONNECTING, buff);
       delay(reconnectDelayMs);
-      if (open(saveURL)) {
+      if (openC(saveURL)) {
         cb.st(STATUS_RECONNECTED, PSTR("Stream reconnected"));
         break;
       }
