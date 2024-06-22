@@ -24,6 +24,7 @@
 
 AudioFileSourceHTTPStream::AudioFileSourceHTTPStream()
 {
+  client.setInsecure();
   pos = 0;
   reconnectTries = 0;
   saveURL[0] = 0;
@@ -31,6 +32,7 @@ AudioFileSourceHTTPStream::AudioFileSourceHTTPStream()
 
 AudioFileSourceHTTPStream::AudioFileSourceHTTPStream(const char *url)
 {
+  client.setInsecure();
   saveURL[0] = 0;
   reconnectTries = 0;
   open(url);
@@ -40,7 +42,6 @@ bool AudioFileSourceHTTPStream::open(const char *url)
 {
   pos = 0;
   http.begin(client, url);
-  client.setInsecure();
   http.setReuse(true);
 #ifndef ESP32
   http.setFollowRedirects(HTTPC_FORCE_FOLLOW_REDIRECTS);
