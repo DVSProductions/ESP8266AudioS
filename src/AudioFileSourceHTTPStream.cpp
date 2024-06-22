@@ -1,4 +1,4 @@
-/*
+/* a
   AudioFileSourceHTTPStream
   Streaming HTTP source
 
@@ -46,6 +46,7 @@ int AudioFileSourceHTTPStream::openC(const char *url)
   http.setReuse(true);
 #ifndef ESP32
   http.setFollowRedirects(HTTPC_FORCE_FOLLOW_REDIRECTS);
+  //test
 #endif
   int code = http.GET();
   if (code != HTTP_CODE_OK) {
@@ -55,7 +56,7 @@ int AudioFileSourceHTTPStream::openC(const char *url)
   }
   size = http.getSize();
   strncpy(saveURL, url, sizeof(saveURL));
-  saveURL[sizeof(saveURL)-1] = 0;
+  saveURL[sizeof(saveURL)-1] = 0; 
   return 0;
 }
 
