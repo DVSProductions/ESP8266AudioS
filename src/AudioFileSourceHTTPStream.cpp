@@ -17,7 +17,7 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+#define ESP8266
 #if defined(ESP32) || defined(ESP8266)
 
 #include "AudioFileSourceHTTPStream.h"
@@ -40,6 +40,7 @@ bool AudioFileSourceHTTPStream::open(const char *url)
 {
   pos = 0;
   http.begin(client, url);
+  client.setInsecure();
   http.setReuse(true);
 #ifndef ESP32
   http.setFollowRedirects(HTTPC_FORCE_FOLLOW_REDIRECTS);
