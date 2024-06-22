@@ -49,16 +49,14 @@ bool AudioFileSourceHTTPStream::open(const char *url)
 #endif
   int code = http.GET();
   if (code != HTTP_CODE_OK) {
-    ESP_LOGCONFIG("HTTPStream", "Can't open HTTP request");
-    ESP_LOGCONFIG("HTTPStream", (String("HTTP Code: ") + code).c_str());
     http.end();
     cb.st(STATUS_HTTPFAIL, PSTR("Can't open HTTP request"));
-    return false;
+    return code;
   }
   size = http.getSize();
   strncpy(saveURL, url, sizeof(saveURL));
   saveURL[sizeof(saveURL)-1] = 0;
-  return true;
+  return 0;
 }
 
 AudioFileSourceHTTPStream::~AudioFileSourceHTTPStream()

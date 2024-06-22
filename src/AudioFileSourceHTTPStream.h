@@ -39,7 +39,7 @@ class AudioFileSourceHTTPStream : public AudioFileSource
     AudioFileSourceHTTPStream(const char *url);
     virtual ~AudioFileSourceHTTPStream() override;
     
-    virtual bool open(const char *url) override;
+    virtual int open(const char *url) override;
     virtual uint32_t read(void *data, uint32_t len) override;
     virtual uint32_t readNonBlock(void *data, uint32_t len) override;
     virtual bool seek(int32_t pos, int dir) override;
