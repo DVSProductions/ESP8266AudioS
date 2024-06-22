@@ -26,6 +26,7 @@
   #include <HTTPClient.h>
 #else
   #include <ESP8266HTTPClient.h>
+  #include <WiFiClientSecure.h>
 #endif
 #include "AudioFileSource.h"
 
