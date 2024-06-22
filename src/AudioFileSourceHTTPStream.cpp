@@ -39,7 +39,7 @@ AudioFileSourceHTTPStream::AudioFileSourceHTTPStream(const char *url)
   open(url);
 }
 
-bool AudioFileSourceHTTPStream::open(const char *url)
+int AudioFileSourceHTTPStream::open(const char *url)
 {
   pos = 0;
   http.begin(client, url);
