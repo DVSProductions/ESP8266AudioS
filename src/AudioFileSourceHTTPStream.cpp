@@ -17,9 +17,10 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#define ESP8266
 #if defined(ESP32) || defined(ESP8266)
-
+#ifndef ESP_LOGCONFIG
+#define ESP_LOGCONFIG(x, y)
+#endif
 #include "AudioFileSourceHTTPStream.h"
 
 AudioFileSourceHTTPStream::AudioFileSourceHTTPStream()
@@ -48,6 +49,8 @@ bool AudioFileSourceHTTPStream::open(const char *url)
 #endif
   int code = http.GET();
   if (code != HTTP_CODE_OK) {
+    ESP_LOGCONFIG("HTTPStream", "Can't open HTTP request");
+    ESP_LOGCONFIG("HTTPStream", (String("HTTP Code: ") + code).c_str());
     http.end();
     cb.st(STATUS_HTTPFAIL, PSTR("Can't open HTTP request"));
     return false;
